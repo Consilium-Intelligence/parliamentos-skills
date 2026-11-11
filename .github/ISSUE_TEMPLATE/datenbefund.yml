@@ -1,0 +1,28 @@
+name: Datenbefund
+description: Eine amtliche Zeile in ParliamentOS weicht vom Originaldokument ab oder fehlt.
+labels: [datenbefund]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke, Datenbefunde haben bei uns Vorrang. Kennung und Original reichen; bitte keine Texte mit
+        personenbezogenen Daten über die öffentliche Parlamentsarbeit hinaus.
+  - type: input
+    id: kennung
+    attributes:
+      label: Kennung
+      placeholder: "[[beleg:bt-rede:…]]"
+    validations:
+      required: true
+  - type: input
+    id: original
+    attributes:
+      label: Link zum Original
+      placeholder: "https://dserver.bundestag.de/…"
+  - type: textarea
+    id: abweichung
+    attributes:
+      label: Was weicht ab?
+      description: Feld (Datum, Person, Partei, Wortlaut, Zahl), Wert in ParliamentOS, Wert im Original.
+    validations:
+      required: true

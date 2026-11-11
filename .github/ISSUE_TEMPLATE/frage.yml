@@ -1,0 +1,18 @@
+name: Frage
+description: Fragen zu Installation, Anmeldung oder Nutzung.
+labels: [frage]
+body:
+  - type: markdown
+    attributes:
+      value: Bitte keine Zugangsdaten, Schlüssel oder vollständigen Antworten mit personenbezogenen Daten einfügen.
+  - type: textarea
+    id: frage
+    attributes:
+      label: Deine Frage
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Client
+      placeholder: "Claude Code, claude.ai, ChatGPT, anderer MCP-Client"

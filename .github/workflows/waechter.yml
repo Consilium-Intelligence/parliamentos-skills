@@ -1,0 +1,89 @@
+# Wächter: läuft bei jedem Push und jedem Pull Request. Rot heißt: kein Merge (Branch-Schutz auf main).
+# Vier Prüfungen, jede als eigener Job, damit der Branch-Schutz sie einzeln verlangen kann.
+name: Wächter
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # Montags 06:17 UTC: Links altern auch ohne Commit.
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: waechter-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  plugin:
+    name: Plugin und Marktplatz
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Claude Code installieren (feste Version)
+        run: npm install --global @anthropic-ai/claude-code@2.1.322
+      - name: Plugin prüfen (Verzeichnisprofil, streng)
+        run: claude plugin validate --strict --profile directory plugins/parliamentos
+      - name: Marktplatz prüfen
+        run: claude plugin validate --strict .
+
+  geheimnisse:
+    name: Geheimnisse
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GITLEAKS_VERSION: 8.30.1
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # ganze Historie für gitleaks
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Muster aus dem Hauptrepo (getrackte Dateien)
+        run: node scripts/waechter/geheimnisse.mjs
+      - name: gitleaks laden und Prüfsumme abgleichen
+        run: |
+          set -euo pipefail
+          base="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
+          datei="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -sSfL -o "$datei" "$base/$datei"
+          curl -sSfL -o summen.txt "$base/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+          grep " $datei\$" summen.txt | sha256sum --check --strict
+          tar -xzf "$datei" gitleaks
+      - name: gitleaks über die ganze Historie
+        run: ./gitleaks git --redact --no-banner --exit-code 1 .
+
+  spuren:
+    name: Spuren
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Tests der Wächter
+        run: node --test scripts/waechter/waechter.test.mjs
+      - name: Interne Spuren
+        run: node scripts/waechter/spuren.mjs
+
+  links:
+    name: Links
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Adressen von consiliumos.io und Connector
+        run: node scripts/waechter/links.mjs
