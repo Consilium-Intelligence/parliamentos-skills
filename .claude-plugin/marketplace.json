@@ -1,0 +1,17 @@
+{
+  "name": "parliamentos-skills",
+  "description": "Skills von ConsiliumOS für ParliamentOS",
+  "owner": {
+    "name": "ConsiliumOS",
+    "email": "albrecht@consiliumos.io",
+    "url": "https://consiliumos.io"
+  },
+  "plugins": [
+    {
+      "name": "parliamentos",
+      "source": "./plugins/parliamentos",
+      "description": "Belegte Antworten zu Bundestag, Landtagen, Nationalrat und EU-Parlament: amtliche Zeilen aus ParliamentOS mit Beleg-Kennung, Beleg-Seite und Original, geprüft mit signiertem Prüfschein.",
+      "version": "1.6.0"
+    }
+  ]
+}

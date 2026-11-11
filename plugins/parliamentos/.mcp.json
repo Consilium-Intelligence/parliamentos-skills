@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "parliamentos": {
+      "type": "http",
+      "url": "https://slbysjtdcfwilupwqerr.supabase.co/functions/v1/parliamentos-mcp"
+    }
+  }
+}
