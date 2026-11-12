@@ -4,6 +4,7 @@
 und Original, die fertige Antwort mit signiertem Prüfschein.**
 
 [![Wächter](https://github.com/Consilium-Intelligence/parliamentos-skills/actions/workflows/waechter.yml/badge.svg)](https://github.com/Consilium-Intelligence/parliamentos-skills/actions/workflows/waechter.yml)
+[![mcptry: Status und Punkte](https://mcptry.com/badge/io.consiliumos/parliamentos)](https://mcptry.com/servers/io.consiliumos/parliamentos)
 ![Plugin-Version](https://img.shields.io/badge/plugin-1.6.0-1f6f5c)
 ![Lizenz](https://img.shields.io/badge/Lizenz-MIT-1f6f5c)
 
