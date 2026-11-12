@@ -1,0 +1,34 @@
+name: Fehler
+description: Das Plugin, der Skill oder der Connector verhält sich anders als beschrieben.
+labels: [fehler]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke! Bitte fügt **keine vollständigen Antworten** mit personenbezogenen Daten ein.
+        Kennungen wie `[[beleg:ds:279704]]` und der Link zum Prüfschein genügen zum Nachstellen.
+  - type: textarea
+    id: was
+    attributes:
+      label: Was ist passiert?
+      description: Schritte und Ergebnis, möglichst kurz.
+    validations:
+      required: true
+  - type: textarea
+    id: erwartet
+    attributes:
+      label: Was hast du erwartet?
+    validations:
+      required: true
+  - type: input
+    id: belege
+    attributes:
+      label: Kennungen oder Prüfschein-Link
+      placeholder: "[[beleg:ds:279704]] oder https://consiliumos.io/pruefschein/…"
+  - type: input
+    id: version
+    attributes:
+      label: Plugin-Version und Client
+      placeholder: "1.6.0, Claude Code 2.1.x / claude.ai / ChatGPT"
+    validations:
+      required: true
