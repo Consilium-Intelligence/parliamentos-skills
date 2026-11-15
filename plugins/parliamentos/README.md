@@ -4,7 +4,8 @@ Belegte Antworten zu Bundestag, Landtagen, Nationalrat und EU-Parlament. Das Plu
 ParliamentOS und bringt den Skill **belegen** mit: Jede Aussage über eine Rede, eine Abstimmung, eine Drucksache
 oder einen Lobbykontakt trägt eine Beleg-Kennung, einen Link zur Beleg-Seite und einen zum Originaldokument.
 Die fertige Antwort prüft das Werkzeug `pruefe_belege` gegen die amtlichen Zeilen und stellt einen signierten,
-öffentlich lesbaren Prüfschein aus.
+öffentlich lesbaren Prüfschein aus. Der Skill **rede-belegen** baut darauf auf: Er fragt für Reden, Bilanzen und
+Dossiers alle Belegarten ab und schneidet eine Rede am gemessenen Sprechtempo des Redners zu.
 
 Installieren (in Claude Code):
 
@@ -16,4 +17,4 @@ Installieren (in Claude Code):
 Einrichten: Nach der Installation mit `/mcp` bei ParliamentOS anmelden. Ein kostenloses Konto mit 100 Aufrufen und 20 Prüfscheinen im Monat
 gibt es unter https://consiliumos.io/mcp.
 
-Version 1.6.0 · Lizenz MIT · Datenschutz: https://consiliumos.io/privacy
+Version 1.6.5 · Lizenz MIT · Datenschutz: https://consiliumos.io/privacy
