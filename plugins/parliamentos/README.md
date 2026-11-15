@@ -17,4 +17,4 @@ Installieren (in Claude Code):
 Einrichten: Nach der Installation mit `/mcp` bei ParliamentOS anmelden. Ein kostenloses Konto mit 100 Aufrufen und 20 Prüfscheinen im Monat
 gibt es unter https://consiliumos.io/mcp.
 
-Version 1.6.5 · Lizenz MIT · Datenschutz: https://consiliumos.io/privacy
+Version 1.6.6 · Lizenz MIT · Datenschutz: https://consiliumos.io/privacy

@@ -1,6 +1,6 @@
 ---
 name: belegen
-version: 1.6.5
+version: 1.6.6
 description: Belegt Aussagen zu Bundestag, Landtagen, Nationalrat und EU-Parlament mit amtlichen Zeilen aus ParliamentOS (Beleg-Kennung, Beleg-Seite, Original) und prüft die fertige Antwort mit pruefe_belege. Use when a user asks what a parliament, faction, MP or MEP said, voted, tabled or lobbied, asks for quotes or sources on German, Austrian or EU politics, or wants a text with verifiable citations.
 ---
 
@@ -10,7 +10,7 @@ Der Connector liefert die Zeile, dieser Skill die Disziplin, der Validator den B
 MCP-Prompt `belegte_antwort` mit jeder Verbindung zu ParliamentOS.
 
 <!-- KERN-ANFANG -->
-Regeln für belegte Antworten mit ParliamentOS (Beleg-Vertrag v9)
+Regeln für belegte Antworten mit ParliamentOS (Beleg-Vertrag v10)
 
 1. Das Gate: Jede Aussage über eine Rede, eine Abstimmung, eine Drucksache, einen Lobbykontakt oder ein Treffen trägt eine Beleg-Kennung aus einer Antwort von ParliamentOS. Fehlt der Connector, steht am Anfang der Antwort: „ParliamentOS ist nicht verbunden. Verbinden: https://consiliumos.io/mcp“. Dann trägt jede Aussage aus dem Gedächtnis den Vermerk „(ungeprüft)“.
 
@@ -44,7 +44,7 @@ Nach ]] folgt ein Leerzeichen oder ein Satzzeichen, nie direkt eine öffnende Kl
 8. Befund melden: Ist das Werkzeug melde_befund verfügbar, meldet die KI damit, was an Daten oder Werkzeugen auffällt: Die Zeile aus get_beleg weicht vom Original ab, ein Treffer kommt ohne Kennung, im Bestand fehlt, was das Original innerhalb der Bestandsgrenze führt, oder eine Werkzeugbeschreibung verspricht etwas anderes als das Ergebnis. Die Meldung besteht aus festen Feldern: Art, Kennung oder Werkzeug, bei einer Abweichung das Merkmal mit dem Wert der Zeile und dem Wert des Originals, sonst eine Auswahl aus der Liste der Art. Die Frage des Nutzers und Angaben über Personen außerhalb der amtlichen Zeile gehören nie hinein. Je Befund eine Meldung; sie zählt nicht im Monatskontingent.
 <!-- KERN-ENDE -->
 
-Beim Aufruf von pruefe_belege das Feld regeln auf skill-belegen@1.6.5 setzen.
+Beim Aufruf von pruefe_belege das Feld regeln auf skill-belegen@1.6.6 setzen.
 
 ## Beispielantwort (verkürzt)
 

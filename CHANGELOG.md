@@ -3,7 +3,16 @@
 Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionen nach [SemVer](https://semver.org/lang/de/).
 Die Version des Plugins folgt der Version des Skills `belegen`.
 
-## [Unveröffentlicht]
+## [1.6.6] – 2026-11-15
+
+### Geändert
+- Skill `belegen` 1.6.5 → 1.6.6: Beleg-Vertrag v10. Inhaltsdatum-Regel: Ein Termin im Fließtext („auf den
+  1. Oktober 2027“), der wörtlich in der belegten Zeile steht, gilt als Inhalt der Quelle und wird nicht mit dem Datum
+  der Rede oder Drucksache verglichen. Hinter „am“ und „vom“, an harten Angaben und in Tabellen wird weiter verglichen.
+- Skill `rede-belegen` 1.1.0: Die Rede bekommt einen eigenen Prüfschein. Eine Prüffassung mit Kennung hinter jedem
+  Zitat und jeder harten Angabe läuft durch `pruefe_belege`; Aussagen ohne Kennung werden umformuliert oder gestrichen.
+  Die Sprechfassung ist die freigegebene Prüffassung ohne Kennungen. Ohne Prüfschein steht die Rede als
+  „Entwurf, ungeprüft“ da.
 
 ### Geändert
 - Skill `rede-belegen` 1.1.0: Die Rede bekommt einen eigenen Prüfschein. Eine Prüffassung mit Kennung hinter jedem
