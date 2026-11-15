@@ -1,12 +1,12 @@
 ---
 name: rede-belegen
-version: 1.0.0
-description: Schreibt Reden, Bilanzen und Dossiers zu Abgeordneten, Ministerinnen und Ministern mit Belegen aus ParliamentOS. Fragt alle Belegarten ab, schneidet die Rede am gemessenen Sprechtempo zu und prüft die Belege mit pruefe_belege. Use when a user wants a speech, a record, a dossier or a compilation of what a German, Austrian or EU politician said, voted or tabled on a topic.
+version: 1.1.0
+description: Schreibt Reden, Bilanzen und Dossiers zu Abgeordneten, Ministerinnen und Ministern mit Belegen aus ParliamentOS. Fragt alle Belegarten ab, schneidet die Rede am gemessenen Sprechtempo zu und prüft Belegliste und Rede mit pruefe_belege. Use when a user wants a speech, a record, a dossier or a compilation of what a German, Austrian or EU politician said, voted or tabled on a topic.
 ---
 
 # Rede mit Belegen
 
-Fünf Schritte, in dieser Reihenfolge. Format und Prüfregeln für jede Kennung stehen im Skill `belegen`.
+Sechs Schritte, in dieser Reihenfolge. Format und Prüfregeln für jede Kennung stehen im Skill `belegen`.
 
 ## 1. Auftrag klären, vor der ersten Suche
 
@@ -46,14 +46,32 @@ Absatz mit dem Vorlagedatum.
 
 - Zielwortzahl = Sprechtempo des Redners × Minuten × 0,95. Der Rest ist Puffer für Beifall und Zwischenrufe.
 - Ohne Profil des Redners: ein Tempo als Annahme wählen und in der Antwort nennen.
-- Wörter zählen lassen, etwa mit `wc -w`. Die Antwort nennt Wortzahl und Dauer.
-- Jedes Zitat der Rede steht wörtlich in einem Beleg aus Schritt 3.
+- Wörter zählen lassen, etwa mit `wc -w`, an der Sprechfassung aus Schritt 5. Die Antwort nennt Wortzahl, Dauer und
+  den Abstand zur Zielwortzahl, nachgerechnet.
 - Vorwürfe genau fassen: Belege zeigen Haltung, Verschiebung oder Unterlassung. Einen Rechtsverstoß belegt nur eine
   Entscheidung eines Gerichts oder einer Behörde.
 
-## 5. Ausgabe
+## 5. Rede prüfen
 
-1. Belegliste mit der Fußzeile des Prüfscheins
+Die Rede ist der Text, den Menschen hören und weitergeben; sie bekommt einen eigenen Prüfschein.
+
+1. **Prüffassung schreiben:** die Rede mit einer Kennung direkt hinter jedem wörtlichen Zitat und jeder harten Angabe
+   (Datum, Drucksachennummer, Betrag, Stimmenzahl, Attribution). Zitate in der Rede wörtlich aus dem Volltext
+   übernehmen, ohne Groß- oder Kleinschreibung am Satzanfang anzupassen; ein Teilsatz beginnt mit „[…]“.
+2. **Aussagen ohne Kennung klären:** Eine Sachaussage, die keine Zeile trägt (etwa ein Fall, der nur in fremden Reden
+   vorkommt, oder „es gibt keinen Entwurf“), wird umformuliert, bis eine Kennung sie trägt (zum Beispiel als Aussage
+   der Rednerin mit deren `bt-rede`), oder gestrichen. Wertungen und Forderungen der Rede brauchen keine Kennung.
+3. **Prüfen:** Die Prüffassung mit `pruefe_belege` prüfen. Bei gesperrt korrigieren und erneut prüfen, bis freigegeben.
+4. **Sprechfassung ableiten:** die freigegebene Prüffassung ohne Kennungen, sonst Wort für Wort gleich. Jede weitere
+   Änderung am Text verlangt einen neuen Prüflauf.
+
+## 6. Ausgabe
+
+1. Belegliste mit der Fußzeile ihres Prüfscheins
 2. Links je Kennung: Beleg-Seite und Original
-3. Grenzen: abgefragte Belegarten ohne Treffer, Annahmen
-4. Rede mit Wortzahl und Dauer
+3. Grenzen: abgefragte Belegarten ohne Treffer, Annahmen, gestrichene Aussagen
+4. Rede als Sprechfassung mit Wortzahl und Dauer, darunter die Fußzeile des Prüfscheins der Rede
+5. Prüffassung der Rede mit Kennungen, aufklappbar oder als Anhang
+
+Das Wort „geprüft“ steht nur an Texten mit freigegebenem Prüfschein. Fehlt der Prüfschein der Rede, steht die Rede
+unter der Überschrift „Entwurf, ungeprüft“.
