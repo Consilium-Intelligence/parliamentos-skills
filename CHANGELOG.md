@@ -14,12 +14,6 @@ Die Version des Plugins folgt der Version des Skills `belegen`.
   Die Sprechfassung ist die freigegebene Prüffassung ohne Kennungen. Ohne Prüfschein steht die Rede als
   „Entwurf, ungeprüft“ da.
 
-### Geändert
-- Skill `rede-belegen` 1.1.0: Die Rede bekommt einen eigenen Prüfschein. Eine Prüffassung mit Kennung hinter jedem
-  Zitat und jeder harten Angabe läuft durch `pruefe_belege`; Aussagen ohne Kennung werden umformuliert oder gestrichen.
-  Die Sprechfassung ist die freigegebene Prüffassung ohne Kennungen. Ohne Prüfschein steht die Rede als
-  „Entwurf, ungeprüft“ da.
-
 ## [1.6.5] – 2026-11-15
 
 ### Hinzugefügt
