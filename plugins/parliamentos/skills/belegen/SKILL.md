@@ -1,6 +1,6 @@
 ---
 name: belegen
-version: 1.6.6
+version: 1.8.1
 description: Belegt Aussagen zu Bundestag, Landtagen, Nationalrat und EU-Parlament mit amtlichen Zeilen aus ParliamentOS (Beleg-Kennung, Beleg-Seite, Original) und prüft die fertige Antwort mit pruefe_belege. Use when a user asks what a parliament, faction, MP or MEP said, voted, tabled or lobbied, asks for quotes or sources on German, Austrian or EU politics, or wants a text with verifiable citations.
 ---
 
@@ -10,7 +10,7 @@ Der Connector liefert die Zeile, dieser Skill die Disziplin, der Validator den B
 MCP-Prompt `belegte_antwort` mit jeder Verbindung zu ParliamentOS.
 
 <!-- KERN-ANFANG -->
-Regeln für belegte Antworten mit ParliamentOS (Beleg-Vertrag v10)
+Regeln für belegte Antworten mit ParliamentOS (Beleg-Vertrag v23)
 
 1. Das Gate: Jede Aussage über eine Rede, eine Abstimmung, eine Drucksache, einen Lobbykontakt oder ein Treffen trägt eine Beleg-Kennung aus einer Antwort von ParliamentOS. Fehlt der Connector, steht am Anfang der Antwort: „ParliamentOS ist nicht verbunden. Verbinden: https://consiliumos.io/mcp“. Dann trägt jede Aussage aus dem Gedächtnis den Vermerk „(ungeprüft)“.
 
@@ -25,7 +25,7 @@ Die Grünen legten 21/222 am 20.05.2025 vor [[beleg:ds:ID]], der Bundestag lehnt
 Nach ]] folgt ein Leerzeichen oder ein Satzzeichen, nie direkt eine öffnende Klammer, weil Markdown „]](“ als Link liest. Die Links stehen gesammelt am Ende der Antwort, je Kennung eine Zeile, die mit der Kennung beginnt:
 [[beleg:bt-rede:ID]] Beleg: https://consiliumos.io/beleg/bt-rede/ID, Original: Link aus der Werkzeugantwort
 
-4. Zwei Kennungsarten: [[beleg:quelle:schlüssel]] gehört zum Prüfregister mit dreiundzwanzig Belegarten und wird von pruefe_belege gegen die amtliche Zeile geprüft. Den Beschluss des Bundestags über eine Vorlage und ihre Verkündung belegt die Kennung [[beleg:bt-vorgang:…]], die search_drucksachen und get_beleg je Drucksache nennen. Die Kennung ds trägt Nummer und Vorlagedatum der Drucksache, bt-vorgang trägt Beschlussdatum, Ergebnis, Verkündungsdatum und die Drucksachennummern des Beschlusses. Die Fundstelle im Bundesgesetzblatt gleicht der Prüfer nicht ab. Die Latenz Brüssel–Berlin belegt get_bruessel_berlin_latenz je Fall mit zwei Kennungen: eu-kom trägt das Datum der Annahme durch die Kommission, bt-vpos das Datum der Zuleitung an den Bundestag; jedes Datum steht direkt vor seiner Kennung. Dass beide Kennungen zur selben Vorlage gehören, prüft der Prüfer nicht. Anzahl, Median, Quartile und Spanne der Latenz tragen die Kennung kennzahl: Sie steht für die festgeschriebene Liste der Vorlagen, aus der der Prüfer die Zahlen nachrechnet; die Zahlen stehen direkt vor ihrer Kennung. Einen EU-Rechtsakt belegt die Kennung [[beleg:eu-rechtsakt:CELEX]] aus get_richtlinien_historie: Sie trägt Datum, CELEX und Rechtsaktnummer (Verordnung (EU) 2025/40 gehört zu 32025R0040) und, wo der Volltext vorliegt, den Wortlaut. Kennungen der Form quelle:schlüssel ohne Klammern führen zur Zeile und zum Original; die Prüfung umfasst sie heute noch nicht. Das sagt die Antwort dem Leser in einem Satz, wenn sie solche Kennungen enthält.
+4. Zwei Kennungsarten: [[beleg:quelle:schlüssel]] gehört zum Prüfregister mit dreißig Belegarten und wird von pruefe_belege gegen ihre Zeile geprüft. Den Beschluss des Bundestags über eine Vorlage und ihre Verkündung belegt die Kennung [[beleg:bt-vorgang:…]], die search_drucksachen und get_beleg je Drucksache nennen. Die Kennung ds trägt Nummer und Vorlagedatum der Drucksache, bt-vorgang trägt Beschlussdatum, Ergebnis, Verkündungsdatum und die Drucksachennummern des Beschlusses. Wie die Fraktionen in einer namentlichen Abstimmung gestimmt haben, belegt die Kennung [[beleg:bt-abst:…]] aus search_bundestag_abstimmungen: Der Prüfer vergleicht jedes Fraktionsvotum mit der Zählung je Fraktion dieser Zeile; ein Fraktionsvotum vor einer anderen Kennung und ein Votum der Koalition oder Opposition sperren den Prüfschein. Die Fundstelle im Bundesgesetzblatt gleicht der Prüfer nicht ab. Die Latenz Brüssel–Berlin belegt get_bruessel_berlin_latenz je Fall mit zwei Kennungen: eu-kom trägt das Datum der Annahme durch die Kommission, bt-vpos das Datum der Zuleitung an den Bundestag; jedes Datum steht direkt vor seiner Kennung. Dass beide Kennungen zur selben Vorlage gehören, prüft der Prüfer nicht. Anzahl, Median, Quartile und Spanne der Latenz tragen die Kennung kennzahl: Sie steht für die festgeschriebene Liste der Vorlagen, aus der der Prüfer die Zahlen nachrechnet; die Zahlen stehen direkt vor ihrer Kennung. Die Zahl der Vorgänge im Landtag Brandenburg zu einem Ort, je Typ und zusammen, trägt in search_bb_landtag_vorgaenge ebenfalls die Kennung kennzahl: Die Antwort nennt jede Zahl mit ihrem Nomen direkt vor ihrer Kennung (8 Anfragen [[beleg:kennzahl:…]]), addiert keine Typen und nennt den Zeitraum erst hinter der letzten Kennung des Absatzes; ein Datum davor sperrt. Einen EU-Rechtsakt belegt die Kennung [[beleg:eu-rechtsakt:CELEX]] aus get_richtlinien_historie: Sie trägt Datum, CELEX und Rechtsaktnummer (Verordnung (EU) 2025/40 gehört zu 32025R0040) und, wo der Volltext vorliegt, den Wortlaut. IFG-Dokumente des Landes Salzburg belegt die Kennung [[beleg:sbg-ifg:…]] aus search_sbg_ifg_dokumente; aus Dokumenten mit dem Vermerk Texterkennung zitiert die Antwort nicht wörtlich, und ein Muster benennt sie als Muster. Das Landesbudget Salzburg belegen die Kennungen [[beleg:sbg-budget:…]] (Position) und [[beleg:sbg-budget-summe:…]] (aus den Positionen nachgerechnete Summe) aus get_sbg_landesbudget. Ein Betrag nennt die Währung (10.000 €, 4,18 Mrd. €), sonst ist er unlesbar und sperrt. Der Prüfer rundet den Wert der Zeile kaufmännisch auf die letzte angegebene Stelle in der angegebenen Einheit (€, Tsd. €, Mio. €, Mrd. €); Wörter wie „rund“ oder „etwa“ ändern daran nichts. Das Jahr steht vor der Kennung und entspricht ihrem Jahr. Ein Betrag aus dem Voranschlag ist geplant oder veranschlagt, ausgegeben und eingenommen sind Beträge aus dem Rechnungsabschluss; eine Verwechslung sperrt. An sbg-budget prüft der Prüfer kein Datum: Ein Beschlussdatum steht vor seiner eigenen Kennung. Prozentangaben und Veränderungen gegenüber dem Vorjahr sind nicht prüfbar. Vorsichtig sperren im Satz einer Budget-Kennung auch eine Zahl mit Einheit ohne Währung (0,56 Mio. Einwohner) und eine Aktenzahl mit Schrägstrich-Jahr (Zl. 2024/12). Ressortnamen gibt die Antwort als Ressortbezeichnung laut Datei wieder. Kennungen org-dok sind eigene Quellen der Organisation; sie zählen nicht als amtlich. Kennungen der Form quelle:schlüssel ohne Klammern führen zur Zeile und zum Original; die Prüfung umfasst sie heute noch nicht. Das sagt die Antwort dem Leser in einem Satz, wenn sie solche Kennungen enthält.
 
 5. Prüfen mit pruefe_belege: Vorher jeden Absatz durchgehen. Nennt er einen Namen, eine Partei, eine Zahl, ein Datum oder ein Zitat, trägt er eine Kennung; sonst Kennung ergänzen oder Absatz streichen. Harte Angaben sind Drucksachennummern (21/322), Stimmenzahlen (578 : 39 : 15), Beträge in Euro, EU-Kennungen (CELEX, TA-Nummer, A-Referenz, Verfahrensnummer, im Absatz einer Kennung eu-rechtsakt auch die Rechtsaktnummer wie 2019/904), Attributionen in Klammern (Nachname, 05.06.2025) und wörtliche Zitate in Anführungszeichen. Jede harte Angabe braucht im selben Absatz eine Kennung, deren Zeile sie trägt; sonst sperrt der Prüfschein. Nummern von Plenarprotokollen zählen nicht als Angabe. Dann die ganze fertige Antwort übergeben, genau so, wie der Leser sie sieht.
 - Ergebnis gesperrt: der Handlungszeile aus der Antwort folgen; die Wörter „geprüft“ und „verifiziert“ stehen dann nirgends im Text.
@@ -44,7 +44,7 @@ Nach ]] folgt ein Leerzeichen oder ein Satzzeichen, nie direkt eine öffnende Kl
 8. Befund melden: Ist das Werkzeug melde_befund verfügbar, meldet die KI damit, was an Daten oder Werkzeugen auffällt: Die Zeile aus get_beleg weicht vom Original ab, ein Treffer kommt ohne Kennung, im Bestand fehlt, was das Original innerhalb der Bestandsgrenze führt, oder eine Werkzeugbeschreibung verspricht etwas anderes als das Ergebnis. Die Meldung besteht aus festen Feldern: Art, Kennung oder Werkzeug, bei einer Abweichung das Merkmal mit dem Wert der Zeile und dem Wert des Originals, sonst eine Auswahl aus der Liste der Art. Die Frage des Nutzers und Angaben über Personen außerhalb der amtlichen Zeile gehören nie hinein. Je Befund eine Meldung; sie zählt nicht im Monatskontingent.
 <!-- KERN-ENDE -->
 
-Beim Aufruf von pruefe_belege das Feld regeln auf skill-belegen@1.6.6 setzen.
+Beim Aufruf von pruefe_belege das Feld regeln auf skill-belegen@1.8.1 setzen.
 
 ## Beispielantwort (verkürzt)
 
@@ -61,6 +61,18 @@ Beim Aufruf von pruefe_belege das Feld regeln auf skill-belegen@1.6.6 setzen.
 
 Die letzte Zeile stammt wörtlich aus der Antwort von `pruefe_belege` und steht nur bei Ergebnis `freigegeben`.
 Bei `gesperrt` lautet sie „Prüfung: n von m Belegstellen verifiziert. Prüfschein: …“; wird eine Kennung mehrfach geprüft (Fließtext und Quellenliste), nennt die Fußzeile zusätzlich die Zahl der Kennungen.
+
+## Beispiel Landesbudget Salzburg (verkürzt)
+
+> Für Dolmetschergebühren des Landtags sind 2025 10.000 € veranschlagt [[beleg:sbg-budget:VA-2025-EH-00001-6410001]]
+>
+> Das Land plant 2025 rund 4,2 Mrd. € Aufwendungen [[beleg:sbg-budget-summe:VA-2025-EH-gesamt-aufw]]
+
+Beide Beträge stammen aus dem Voranschlag und heißen darum geplant oder veranschlagt. Das Jahr steht vor der
+Kennung, der Betrag nennt die Währung. „rund 4,2 Mrd. €“ besteht, weil die nachgerechnete Summe (4.183.537.400,00 €)
+auf eine Nachkommastelle in Milliarden gerundet 4,2 ergibt. 11.000 € oder „gab 2025 10.000 € aus“ sperren den
+Prüfschein. Zahlen aus dem Rechnungsabschluss heißen ausgegeben oder eingenommen. Anteile in Prozent und Vergleiche
+mit dem Vorjahr rechnet der Prüfer nicht nach; im Absatz einer Budget-Kennung sperren sie den Prüfschein.
 
 ## Was der Prüfschein bedeutet
 
