@@ -1,7 +1,7 @@
 {
   "name": "parliamentos",
   "displayName": "ParliamentOS",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "Belegte Antworten zu Bundestag, Landtagen, Nationalrat und EU-Parlament: amtliche Zeilen aus ParliamentOS mit Beleg-Kennung, Beleg-Seite und Original, geprüft mit signiertem Prüfschein.",
   "author": {
     "name": "ConsiliumOS",
