@@ -3,6 +3,14 @@
 Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionen nach [SemVer](https://semver.org/lang/de/).
 Die Version des Plugins folgt der Version des Skills `belegen`.
 
+## [1.9.0] – 2026-11-23
+
+### Geändert
+- Skill `belegen` 1.8.1 → 1.9.0: Regel 4 erklärt die Salzburger Landtagsanfragen. `sbg-anf` belegt eine Anfrage
+  (Titel, Wortlaut, Datum, Einbringer, Klub; Fundstelle einer Einzelfrage als `@von-bis`), `sbg-bea` je Abschnitt
+  ihrer Beantwortung (Originaltext, Tag der Beantwortung, beantwortende Person ohne Amt und Grad). Protokollauszüge
+  dringlicher Anfragen stehen je Redebeitrag (`…/r1`, `…/r2`) mit Sprecher und Sitzungstag. Beleg-Vertrag bleibt v23.
+
 ## [1.8.1] – 2026-11-23
 
 ### Hinzugefügt
