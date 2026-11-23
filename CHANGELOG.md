@@ -3,6 +3,22 @@
 Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionen nach [SemVer](https://semver.org/lang/de/).
 Die Version des Plugins folgt der Version des Skills `belegen`.
 
+## [1.8.1] – 2026-11-23
+
+### Hinzugefügt
+- Skill `eu-verfahren-belegen` 1.0.0: führt durch ein EU-Gesetzgebungsverfahren und gibt jeder Station ihre Kennung,
+  vom Kommissionsdokument bis zur Zuleitung an den Bundestag und zum Bundesrat.
+
+### Geändert
+- Skill `belegen` 1.6.6 → 1.8.1: Beleg-Vertrag v23 mit dreißig Belegarten. Neu seit v10: Fraktionsvoten aus
+  namentlichen Abstimmungen (`bt-abst`) und Ergebnisse in Verbform (v11), Stationen von EU-Verfahren (`eu-verfahren`),
+  Ressort und PDF-Prüfsumme an Drucksachen (v13), IFG-Dokumente des Landes Salzburg (`sbg-ifg`, v14), Landesbudget
+  Salzburg mit Rundungsregel (`sbg-budget`, `sbg-budget-summe`, v15, v18, v19), Vorgänge im Landtag Brandenburg mit
+  Partei je Person und Ort (`bb-vorgang`, v16, v20) samt Zählung je Typ (`kennzahl`, v21), eigene Dokumente einer
+  Organisation (`org-dok`, v17, nicht amtlich), Abschnitte der Beantwortungen Salzburger Landtagsanfragen (`sbg-bea`,
+  v22) und deren Redebeiträge je Sprecher und Sitzungstag (v23). Beispiel Landesbudget Salzburg.
+- Plugin-Icon: Signet in Navy, wie überall bei ConsiliumOS.
+
 ## [1.6.6] – 2026-11-15
 
 ### Geändert
